@@ -1,6 +1,7 @@
 #include "Configuration.h"
 
 #include <iostream>
+#include <sstream>
 #include <stdio.h>
 #include <algorithm>
 
@@ -102,7 +103,12 @@ int Configuration::parseInt(const std::string & str){
 }
 
 float Configuration::parseFloat(const std::string & str){
-	return std::stof(str);
+	//quick fix: apparently std::stof,std::stod and co. trucate values on my machine, what?
+	std::stringstream ss;
+	ss << str;
+	float f;
+	ss >> f;
+	return f;
 }
 
 glm::vec3 Configuration::parseVec3(const std::vector<std::string> & strs){
